@@ -24,7 +24,7 @@ namespace TicTacToe
 
         private void InitializeGrid()
         {
-            Grid.BackColor = Color.LightCoral;
+            Grid.BackColor = Color.Transparent;
             Grid.CellBorderStyle = TableLayoutPanelCellBorderStyle.Inset;
         }
 
@@ -59,6 +59,7 @@ namespace TicTacToe
                 }
             //}
             turnCount++;
+            PlaySound("click_sound");
             CheckForWin();
             CheckForDraw();
             xPlayerTurn = !xPlayerTurn;
@@ -137,6 +138,13 @@ namespace TicTacToe
             firstLabel.BackColor = color;
             secondLabel.BackColor = color;
             thirdLabel.BackColor = color;
+        }
+
+        private void PlaySound(string soundName)
+        {
+            System.IO.Stream str = (System.IO.Stream)Properties.Resources.ResourceManager.GetObject(soundName);
+            System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
+            snd.Play();
         }
         private void GameOver()
         {
